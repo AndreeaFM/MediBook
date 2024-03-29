@@ -7,10 +7,12 @@
     @apply py-[75px];
   }
 }
-
+ {
+  /* pl-20 pentru spatiu stanga, pr-20 padding right in container*/
+}
 @layer components {
   .container {
-    @apply max-w-full w-[1440px] px-5 mx-auto pl-40;
+    @apply max-w-full w-[1440px] px-5 mx-auto pl-20 pr-20;
   }
 
   .btn {
