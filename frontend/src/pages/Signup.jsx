@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import signupImg from '../assets/images/signup.gif'
 import avatar from '../assets/images/doctor-img01.png'
@@ -23,12 +23,13 @@ const Signup = () => {
 
   const handleFileInputChange = async (event) => {
     const file = event.target.files[0]
-    //later
+    //later we will use cloudinary to upload images
 
     console.log(file)
   }
 
   const submitHandler = async (event) => {
+    console.log(formData)
     event.preventDefault()
   }
 
