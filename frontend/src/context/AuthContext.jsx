@@ -5,9 +5,12 @@
 import { createContext, useContext, useEffect, useReducer } from 'react'
 
 const initialState = {
-  user: null,
-  role: null,
-  token: null,
+  user:
+    localStorage.getItem('user') != undefined
+      ? JSON.parse(localStorage.getItem('user'))
+      : null,
+  role: localStorage.getItem('role') || null,
+  token: localStorage.getItem('token') || null,
 }
 
 export const authContext = createContext(initialState)
@@ -42,6 +45,15 @@ const authReducer = (state, action) => {
 
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, initialState)
+
+  //automatically upload local storage whenever the authentication state chanhes
+  //ensures that user data is persisted even that the page is refreshed
+  //also grab data from local storage and save it as the initial state
+  useEffect(() => {
+    localStorage.setItem('user', JSON.stringify(state.user))
+    localStorage.setItem('token', JSON.stringify(state.token))
+    localStorage.setItem('role', JSON.stringify(state.role))
+  }, [state])
 
   return (
     <authContext.Provider
