@@ -103,13 +103,11 @@ export const getMyAppointments = async (req, res) => {
       '-password'
     )
 
-    res
-      .status(200)
-      .json({
-        success: true,
-        message: 'Appointments are getting',
-        data: doctors,
-      })
+    res.status(200).json({
+      success: true,
+      message: 'Appointments are getting',
+      data: doctors,
+    })
   } catch (err) {
     res
       .status(500)
