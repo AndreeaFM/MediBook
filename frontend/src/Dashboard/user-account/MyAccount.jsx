@@ -8,6 +8,7 @@ import useGetProfile from '../../hooks/useFetchData.jsx'
 import { BASE_URL } from '../../config.js'
 
 import Loading from '../../components/Loader/Loading.jsx'
+import Error from '../../components/Error/Error.jsx'
 
 const MyAccount = () => {
   const { dispatch } = useContext(authContext)
@@ -27,9 +28,9 @@ const MyAccount = () => {
   return (
     <section>
       <div className="max-w-[1170px] px-5 mx-auto">
-        {loading && <Loading />}
+        {loading && !error && <Loading />}
 
-        {error && <Error />}
+        {error && !loading && <Error errMessage={error} />}
 
         {!loading && !error && (
           <div className="grid md:grid-cols-3 gap-10">
