@@ -12,7 +12,6 @@ const initialState = {
   role: localStorage.getItem('role') || null,
   token: localStorage.getItem('token') || null,
 }
-
 export const authContext = createContext(initialState)
 
 const authReducer = (state, action) => {
@@ -42,7 +41,6 @@ const authReducer = (state, action) => {
       return state
   }
 }
-
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, initialState)
 
@@ -51,8 +49,8 @@ export const AuthContextProvider = ({ children }) => {
   //also grab data from local storage and save it as the initial state
   useEffect(() => {
     localStorage.setItem('user', JSON.stringify(state.user))
-    localStorage.setItem('token', JSON.stringify(state.token))
-    localStorage.setItem('role', JSON.stringify(state.role))
+    localStorage.setItem('token', state.token)
+    localStorage.setItem('role', state.role)
   }, [state])
 
   return (
