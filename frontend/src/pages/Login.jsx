@@ -20,7 +20,6 @@ const Login = () => {
   }
 
   const submitHandler = async (event) => {
-    //console.log(formData)
     event.preventDefault()
     setLoading(true)
 
@@ -39,6 +38,8 @@ const Login = () => {
         throw new Error(result.message)
       }
 
+      localStorage.setItem('token', result.token)
+
       dispatch({
         type: 'LOGIN_SUCCESS',
         payload: {
@@ -47,8 +48,6 @@ const Login = () => {
           role: result.role,
         },
       })
-
-      console.log(result, 'login data')
 
       setLoading(false)
       toast.success(result.message)
@@ -117,3 +116,4 @@ const Login = () => {
 }
 
 export default Login
+//aici am facut modificari

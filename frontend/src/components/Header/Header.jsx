@@ -3,6 +3,7 @@ import logo from '../../assets/images/logo.png'
 import { NavLink, Link } from 'react-router-dom'
 import { BiMenu } from 'react-icons/bi'
 import { authContext } from '../../context/AuthContext'
+import defaultUserImage from '../../assets/images/doctor-img01.png'
 
 const navLinks = [
   {
@@ -43,7 +44,6 @@ const Header = () => {
 
   useEffect(() => {
     handleStickyHeader()
-
     return () => window.removeEventListener('scroll', handleStickyHeader)
   })
 
@@ -55,7 +55,7 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* ========== logo ==========*/}
           <div>
-            <img src={logo} alt="" />
+            <img src={logo} alt="Logo" />
           </div>
 
           {/* ========== menu ==========*/}
@@ -89,11 +89,11 @@ const Header = () => {
                       : '/users/profile/me'
                   }`}
                 >
-                  <figure className="w-[35px] h-[35px] rounded-full cursor-pointer">
+                  <figure className="w-[35px] h-[35px] rounded-full cursor-pointer m-2 border border-pink">
                     <img
-                      src={user?.photo}
-                      className="w-full rounded-full"
-                      alt=""
+                      src={user.photo ? user.photo : defaultUserImage}
+                      className="w-full h-full rounded-full object-cover"
+                      alt="Profile"
                     />
                   </figure>
                 </Link>
@@ -105,8 +105,6 @@ const Header = () => {
                 </button>
               </Link>
             )}
-
-            {/* <h1>{user?.name}</h1>  this refresh when reopen the tab, needing to login again */}
 
             <span className="md:hidden" onClick={toggleMenu}>
               <BiMenu className="w-6 h-6 cursor-pointer" />

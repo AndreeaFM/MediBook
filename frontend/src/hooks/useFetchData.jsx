@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { token } from '../config'
 
 const useFetchData = (url) => {
   const [data, setData] = useState([])
@@ -9,16 +8,19 @@ const useFetchData = (url) => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true)
+      const token = localStorage.getItem('token')
 
       try {
         const res = await fetch(url, {
-          headers: { Authorization: `Bearer ${token}` },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         })
 
         const result = await res.json()
 
         if (!res.ok) {
-          throw new Error(result.message + '  😵‍💫')
+          throw new Error(result.message + ' 😵‍💫')
         }
 
         setData(result.data)
@@ -28,6 +30,7 @@ const useFetchData = (url) => {
         setError(err.message)
       }
     }
+
     fetchData()
   }, [url])
 
@@ -39,3 +42,4 @@ const useFetchData = (url) => {
 }
 
 export default useFetchData
+// aici am facut modificari

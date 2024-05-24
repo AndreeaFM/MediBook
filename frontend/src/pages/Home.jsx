@@ -30,15 +30,19 @@ const Home = () => {
             <div>
               <div className="lg:w-[570px]">
                 <h1 className="text-[36px] leading-[46px] text-headingColor font-[800] md:text-[60px] md:leading-[70px]">
-                  We help patients live a healthy life, longer life
+                  We help patients live a healthy, longer life
                 </h1>
                 <p className="text__para">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Pellentesque non arcu lectus. Praesent a consequat nunc.
-                  Nullam malesuada vehicula massa, at efficitur massa. Phasellus
-                  gravida, metus ac faucibus imperdiet, eros neque dapibus
-                  ligula, eu rutrum est libero non velit. Pellentesque volutpat
-                  accumsan nibh.
+                  On our website, all doctors are dedicated professionals
+                  committed to providing excellent patient care and medical
+                  expertise. They specialize in various fields such as internal
+                  medicine, surgery, pediatrics, obstetrics, and psychiatry. Our
+                  doctors work closely with teams of nurses and other
+                  specialists to create personalized treatment plans for each
+                  patient. They use the latest research and technology to make
+                  informed medical decisions and ensure the highest quality of
+                  care. Our doctors are compassionate and prioritize patient
+                  well-being, even in challenging situations.
                 </p>
 
                 <button className="btn">Request an Appointment </button>
@@ -110,8 +114,9 @@ const Home = () => {
                   Find a doctor
                 </h2>
                 <p className="text-[16px] leading-7 text-textColor font-[400] mt-4 text-center  ">
-                  World-class care for everyone. Our health system offers
-                  unmatched, expert health care. From the lab to the clinic.
+                  Looking for a doctor at our platform? Here you can find a
+                  diverse team of dedicated doctors specializing in various
+                  fields.
                 </p>
 
                 <Link
@@ -134,8 +139,9 @@ const Home = () => {
                   Find a Location
                 </h2>
                 <p className="text-[16px] leading-7 text-textColor font-[400] mt-4 text-center  ">
-                  World-class care for everyone. Our health system offers
-                  unmatched, expert health care. From the lab to the clinic.
+                  Looking for a place closer to you? We have multiple convenient
+                  locations to serve you better n a comfortable and accessible
+                  environment..
                 </p>
 
                 <Link
@@ -158,8 +164,8 @@ const Home = () => {
                   Book Appointment
                 </h2>
                 <p className="text-[16px] leading-7 text-textColor font-[400] mt-4 text-center  ">
-                  World-class care for everyone. Our health system offers
-                  unmatched, expert health care. From the lab to the clinic.
+                  Our online booking system allows you to choose from a variety
+                  of available dates and times that best fit your schedule.
                 </p>
 
                 <Link
@@ -183,8 +189,8 @@ const Home = () => {
           <div className="xl:w-[470px] mx-auto">
             <h2 className="heading text-center">Our medical services</h2>
             <p className="text__para text-center">
-              World-class for everyone. Our health system offers unmatched,
-              expert health care.
+              Exceptional care for all. Our health system delivers expert
+              healthcare.
             </p>
           </div>
 
@@ -215,7 +221,7 @@ const Home = () => {
                   online scheduling tool to select an appointment time.
                 </li>
               </ul>
-              <Link to="/">
+              <Link to="/doctors">
                 <button className="btn">Learn More</button>
               </Link>
             </div>
@@ -254,7 +260,7 @@ const Home = () => {
                 <div className="flex items-center gap-[6px] lg:gap-[10px] mt-2 lg:mt-[18px]">
                   <img src={avatarIcon} alt="" />
                   <h4 className="text-[10px] leading-3 lg:text-[16px] lg:leading-[22px] font-[700] text-headingColor">
-                    Wayne Collins
+                    Popa Florian
                   </h4>
                 </div>
               </div>

@@ -8,7 +8,7 @@ const generateToken = (user) => {
     { id: user._id, role: user.role },
     process.env.JWT_SECRET_KEY,
     {
-      expiresIn: '15d', //maybe 15d like it firstly put
+      expiresIn: '360d', //maybe 15d like it firstly put
     }
   )
 }

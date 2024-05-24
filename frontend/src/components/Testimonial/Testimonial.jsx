@@ -4,6 +4,11 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import patientAvatar from '../../assets/images/patient-avatar.png'
+import patientAvatar2 from '../../assets/images/avatar2.png'
+import patientAvatar3 from '../../assets/images/avatar3.png'
+import patientAvatar4 from '../../assets/images/avatar4.png'
+import patientAvatar5 from '../../assets/images/avatar5.png'
+import patientAvatar6 from '../../assets/images/avatar6.png'
 import { HiStar } from 'react-icons/hi'
 
 const Testimonial = () => {
@@ -32,7 +37,7 @@ const Testimonial = () => {
         <SwiperSlide>
           <div className="py-[30px] px-5 rounded-3">
             <div className="flex items-center gap-[13px]">
-              <img src={patientAvatar} alt="" />
+              <img src={patientAvatar6} alt="" />
               <div>
                 <h4 className="text-[18px] leading-[30px] font-semibold text-headingColor">
                   Alexandru Almasan
@@ -78,10 +83,10 @@ const Testimonial = () => {
         <SwiperSlide>
           <div className="py-[30px] px-5 rounded-3">
             <div className="flex items-center gap-[13px]">
-              <img src={patientAvatar} alt="" />
+              <img src={patientAvatar3} alt="" />
               <div>
                 <h4 className="text-[18px] leading-[30px] font-semibold text-headingColor">
-                  Marius Andras
+                  Mariana Andras
                 </h4>
                 <div className="flex items-center gap-[2px]">
                   <HiStar className="text-yellowColor w-[18px] h-5" />
@@ -101,7 +106,7 @@ const Testimonial = () => {
         <SwiperSlide>
           <div className="py-[30px] px-5 rounded-3">
             <div className="flex items-center gap-[13px]">
-              <img src={patientAvatar} alt="" />
+              <img src={patientAvatar2} alt="" />
               <div>
                 <h4 className="text-[18px] leading-[30px] font-semibold text-headingColor">
                   Victor Almasan
@@ -124,10 +129,10 @@ const Testimonial = () => {
         <SwiperSlide>
           <div className="py-[30px] px-5 rounded-3">
             <div className="flex items-center gap-[13px]">
-              <img src={patientAvatar} alt="" />
+              <img src={patientAvatar4} alt="" />
               <div>
                 <h4 className="text-[18px] leading-[30px] font-semibold text-headingColor">
-                  Valeriu Albert
+                  Valeria Albert
                 </h4>
                 <div className="flex items-center gap-[2px]">
                   <HiStar className="text-yellowColor w-[18px] h-5" />
@@ -147,7 +152,7 @@ const Testimonial = () => {
         <SwiperSlide>
           <div className="py-[30px] px-5 rounded-3">
             <div className="flex items-center gap-[13px]">
-              <img src={patientAvatar} alt="" />
+              <img src={patientAvatar5} alt="" />
               <div>
                 <h4 className="text-[18px] leading-[30px] font-semibold text-headingColor">
                   Cristian Tudor

@@ -65,7 +65,7 @@ export const getAllDoctor = async (req, res) => {
         $or: [
           { name: { $regex: query, $options: 'i' } },
           { specialization: { $regex: query, $options: 'i' } },
-        ], //use for find doctors by name or specialization, i means case sensitive searching
+        ], //use for find doctors by name or specialization, i means case insensitive searching
       }).select('-password')
     } else {
       doctors = await Doctor.find({ isApproved: 'approved' }).select(
@@ -76,7 +76,7 @@ export const getAllDoctor = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: 'Users found',
+      message: 'Doctors found',
       data: doctors,
     })
   } catch (err) {
@@ -97,7 +97,7 @@ export const getDoctorProfile = async (req, res) => {
     }
 
     const { password, ...rest } = doctor._doc
-    const appointments = await Booking.find({ doctor: doctorId })
+    const appointments = await BookingSchema.find({ doctor: doctorId })
 
     res.status(200).json({
       success: true,
@@ -110,3 +110,4 @@ export const getDoctorProfile = async (req, res) => {
       .json({ success: false, message: 'Something went wrong, cannot get' })
   }
 }
+//aici am facut modifcari
