@@ -72,7 +72,7 @@ const Dashboard = () => {
                           lg:text-[16px] lg:leading-6 font-semibold"
                           >
                             <img src={starIcon} alt="" />
-                            {data.averageRating}
+                            {Number(data.averageRating).toFixed(1)}
                           </span>
                           <span
                             className=" text-textColor text-[14px] leading-5

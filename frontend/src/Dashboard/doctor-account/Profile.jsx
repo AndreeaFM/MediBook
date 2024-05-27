@@ -245,10 +245,25 @@ const Profile = ({ doctorData }) => {
                 className="form__input py-3.5"
               >
                 <option value="">Select</option>
-                <option value="surgeon">Surgeon</option>
-                <option value="neurologist">Neurologist</option>
-                <option value="dermatologist">Dermatologist</option>
                 <option value="cardiologist">Cardiologist</option>
+                <option value="dentist">Dentist</option>
+                <option value="dermatologist">Dermatologist</option>
+                <option value="endocrinologist">Endocrinologist</option>
+                <option value="gastroenterologist">Gastroenterologist</option>
+                <option value="hematologist">Hematologist</option>
+                <option value="internist">Internist</option>
+                <option value="nephrologist">Nephrologist</option>
+                <option value="neurologist">Neurologist</option>
+                <option value="obstetrician">Obstetrician</option>
+                <option value="ophthalmologist">Ophthalmologist</option>
+                <option value="otolaryngologist">Otolaryngologist</option>
+                <option value="pediatrician">Pediatrician</option>
+                <option value="pulmonologist">Pulmonologist</option>
+                <option value="psychiatrist">Psychiatrist</option>
+                <option value="radiologist">Radiologist</option>
+                <option value="rheumatologist">Rheumatologist</option>
+                <option value="surgeon">Surgeon</option>
+                <option value="urologist">Urologist</option>
               </select>
             </div>
 
