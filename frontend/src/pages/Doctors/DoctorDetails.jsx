@@ -36,6 +36,8 @@ const DoctorDetails = () => {
     photo,
   } = doctor
 
+  const formattedAvgRating = Number(averageRating).toFixed(1)
+
   return (
     <section>
       <div className="max-w-[1170px] px-5 mx-auto">
@@ -59,7 +61,7 @@ const DoctorDetails = () => {
                   </h3>
                   <div className="flex items-center gap-[6px]">
                     <span className="flex items-center gap-[6px] text-[14px] leading-5 lg:text-[16px] lg:leading-7 font-semibold text-headingColor">
-                      <img src={starIcon} alt="" /> {averageRating}
+                      <img src={starIcon} alt="" /> {formattedAvgRating}
                     </span>
                     <span className='text-[14px] leading-5 lg:text-[16px] lg:leading-7 font-[400] text-textColor ">'>
                       ({totalRating})
@@ -110,7 +112,11 @@ const DoctorDetails = () => {
             </div>
 
             <div>
-              <SidePanel />
+              <SidePanel
+                doctorId={doctor._id}
+                ticketPrice={ticketPrice}
+                timeSlots={timeSlots}
+              />
             </div>
           </div>
         )}
