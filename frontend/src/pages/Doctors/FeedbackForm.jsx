@@ -1,16 +1,62 @@
-import React, { useState } from 'react'
+import { useState, useContext } from 'react'
 import { AiFillStar } from 'react-icons/ai'
+import { useParams } from 'react-router-dom'
+import { BASE_URL } from '../../config'
+import HashLoader from 'react-spinners/HashLoader'
+import { toast } from 'react-toastify'
+import { authContext } from '../../context/AuthContext' // Added this line to import authContext
 
 const FeedbackForm = () => {
   const [rating, setRating] = useState(0)
   const [hover, setHover] = useState(0)
   const [reviewText, setReviewText] = useState('')
+  const [loading, setLoading] = useState(false)
+
+  const { id } = useParams()
+  const { token, role } = useContext(authContext) // Added this line to get token and role from authContext
 
   const handleSubmitReview = async (e) => {
     e.preventDefault()
+    setLoading(true)
 
-    // later use the api
+    try {
+      // Authorization check
+      if (role !== 'patient') {
+        // Added this block for authorization check
+        setLoading(false)
+        return toast.error("You're not authorized")
+      }
+
+      // Validation check
+      if (!rating || !reviewText) {
+        // This block was already present for validation
+        setLoading(false)
+        return toast.error('Rating & Review Fields are required')
+      }
+
+      const response = await fetch(`${BASE_URL}/doctors/${id}/reviews`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`, // Added this line to include the token in the request headers
+        },
+        body: JSON.stringify({ rating, reviewText }),
+      })
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.message)
+      }
+
+      toast.success('Review submitted successfully')
+      setLoading(false)
+    } catch (err) {
+      setLoading(false)
+      toast.error(err.message)
+    }
   }
+
   return (
     <form action="">
       <div>
@@ -57,11 +103,11 @@ const FeedbackForm = () => {
           className="border border-solid border-[#0066ff34] focus:outline outline-primaryColor w-full px-4 py-3 rounded-md"
           rows="5"
           placeholder="Write your message"
-          onChange={() => setReviewText(e.target.value)}
+          onChange={(e) => setReviewText(e.target.value)} // Fixed this line to include 'e' parameter
         ></textarea>
       </div>
       <button type="submit" onClick={handleSubmitReview} className="btn">
-        Submit Feedback
+        {loading ? <HashLoader size={25} color="#fff" /> : 'Submit Feedback'}
       </button>
     </form>
   )
