@@ -44,8 +44,9 @@ const Home = () => {
                   care. Our doctors are compassionate and prioritize patient
                   well-being, even in challenging situations.
                 </p>
-
-                <button className="btn">Request an Appointment </button>
+                <Link to="/doctors">
+                  <button className="btn">Request an Appointment </button>
+                </Link>
               </div>
 
               {/* ========hero counter =======*/}

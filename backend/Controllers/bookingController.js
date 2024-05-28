@@ -45,8 +45,11 @@ export const getCheckoutSession = async (req, res) => {
 
     await booking.save()
 
-    res.send(200).json({ success: true, message: 'Successfully paid', session })
+    res
+      .status(200)
+      .json({ success: true, message: 'Successfully paid', session })
   } catch (err) {
+    console.log(err)
     res
       .status(500)
       .json({ success: false, message: 'Error creating checkout session' })

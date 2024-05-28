@@ -1,26 +1,23 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
 const bookingSchema = new mongoose.Schema(
   {
     doctor: {
       type: mongoose.Types.ObjectId,
-      ref: "Doctor",
+      ref: 'Doctor',
       required: true,
     },
     user: {
       type: mongoose.Types.ObjectId,
-      ref: "User",
+      ref: 'User',
       required: true,
     },
     ticketPrice: { type: String, required: true },
-    appointmentDate: {
-      type: Date,
-      required: true,
-    },
+
     status: {
       type: String,
-      enum: ["pending", "approved", "cancelled"],
-      default: "pending",
+      enum: ['pending', 'approved', 'cancelled'],
+      default: 'pending',
     },
     isPaid: {
       type: Boolean,
@@ -28,6 +25,14 @@ const bookingSchema = new mongoose.Schema(
     },
   },
   { timestamps: true }
-);
+)
 
-export default mongoose.model("Booking", bookingSchema);
+bookingSchema.pre(/^find/, function (next) {
+  this.populate('user').populate({
+    path: 'doctor',
+    select: 'name',
+  })
+  next()
+})
+
+export default mongoose.model('Booking', bookingSchema)
