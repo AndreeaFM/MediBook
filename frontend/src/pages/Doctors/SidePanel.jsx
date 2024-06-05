@@ -1,34 +1,87 @@
-/* eslint-disable react/prop-types */
-import convertTime from '../../utils/convertTime'
-import { BASE_URL, token } from './../../config'
+import React, { useState, useEffect, useContext } from 'react'
+import Calendar from 'react-calendar'
+import 'react-calendar/dist/Calendar.css'
+import { BASE_URL } from '../../config'
 import { toast } from 'react-toastify'
+import { authContext } from '../../context/AuthContext'
 
-const SidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
+const SidePanel = ({ doctorId, ticketPrice }) => {
+  const [selectedDate, setSelectedDate] = useState(new Date())
+  const [availableTimes, setAvailableTimes] = useState([])
+  const { token } = useContext(authContext)
+  const [selectedTime, setSelectedTime] = useState('')
+
+  useEffect(() => {
+    const fetchAvailableTimes = async () => {
+      try {
+        const response = await fetch(
+          `${BASE_URL}/doctors/${doctorId}/available-times`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+
+        const data = await response.json()
+
+        if (response.ok) {
+          setAvailableTimes(data)
+        } else {
+          toast.error(data.message)
+        }
+      } catch (error) {
+        toast.error('Error fetching available times')
+      }
+    }
+
+    fetchAvailableTimes()
+  }, [doctorId, token])
+
   const bookingHandler = async () => {
     try {
-      const res = await fetch(
+      const response = await fetch(
         `${BASE_URL}/bookings/checkout-session/${doctorId}`,
         {
           method: 'post',
           headers: {
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
           },
+          body: JSON.stringify({
+            date: selectedDate.toISOString().split('T')[0],
+            time: selectedTime,
+          }),
         }
       )
 
-      const data = await res.json()
+      const data = await response.json()
 
-      if (!res.ok) {
-        throw new Error(data.message + 'Please try again')
+      if (!response.ok) {
+        throw new Error(data.message)
       }
 
       if (data.session.url) {
         window.location.href = data.session.url
       }
-    } catch (err) {
-      toast.error(err.message)
+    } catch (error) {
+      toast.error(error.message)
     }
   }
+
+  const isDateAvailable = (date) => {
+    const day = date
+      .toLocaleDateString('en-US', { weekday: 'long' })
+      .toLowerCase()
+    return availableTimes.some((slot) => slot.day.toLowerCase() === day)
+  }
+
+  const availableSlots = availableTimes.filter((slot) => {
+    const day = selectedDate
+      .toLocaleDateString('en-US', { weekday: 'long' })
+      .toLowerCase()
+    return slot.day.toLowerCase() === day
+  })
 
   return (
     <div className="shadow-panelShadow p-3 lg:p-5 rounded-md">
@@ -41,21 +94,31 @@ const SidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
 
       <div className="mt-[30px]">
         <p className="text__para mt-0 font-semibold text-headingColor">
+          Available Dates
+        </p>
+        <Calendar
+          onChange={setSelectedDate}
+          value={selectedDate}
+          tileDisabled={({ date }) => !isDateAvailable(date)}
+        />
+      </div>
+
+      <div className="mt-[30px]">
+        <p className="text__para mt-0 font-semibold text-headingColor">
           Available Time Slots
         </p>
-
-        <ul className="mt-3">
-          {timeSlots?.map((item, index) => (
-            <li key={index} className="flex items-center justify-between mb-2">
-              <p className="text-[15px] leading-6 text-textColor font-semibold">
-                {item.day.charAt(0).toUpperCase() + item.day.slice(1)}
-              </p>
-              <p className="text-[15px] leading-6 text-textColor font-semibold">
-                {convertTime(item.startingTime)} -{convertTime(item.endingTime)}
-              </p>
-            </li>
+        <select
+          value={selectedTime}
+          onChange={(e) => setSelectedTime(e.target.value)}
+          className="form__input"
+        >
+          <option value="">Select a time</option>
+          {availableSlots.map((slot, index) => (
+            <option key={index} value={slot.time}>
+              {slot.time}
+            </option>
           ))}
-        </ul>
+        </select>
       </div>
 
       <button onClick={bookingHandler} className="btn px-2 w-full rounded-md">
@@ -66,3 +129,5 @@ const SidePanel = ({ doctorId, ticketPrice, timeSlots }) => {
 }
 
 export default SidePanel
+
+//merge pe hours

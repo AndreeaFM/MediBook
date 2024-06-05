@@ -110,4 +110,25 @@ export const getDoctorProfile = async (req, res) => {
       .json({ success: false, message: 'Something went wrong, cannot get' })
   }
 }
+
+///////// dupa matchmaking timeslots
+
+export const getAvailableTimes = async (req, res) => {
+  const { doctorId } = req.params
+
+  try {
+    const doctor = await Doctor.findById(doctorId)
+
+    if (!doctor) {
+      return res.status(404).json({ message: 'Doctor not found' })
+    }
+
+    res.status(200).json(doctor.timeSlots) // Assuming timeSlots is part of the doctor model
+  } catch (error) {
+    console.error('Error fetching available times:', error)
+    //res.status(500).json({ message: 'Error fetching available times' })
+  }
+}
 //aici am facut modifcari
+
+// until here it works

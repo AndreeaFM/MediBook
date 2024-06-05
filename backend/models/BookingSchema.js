@@ -13,7 +13,9 @@ const bookingSchema = new mongoose.Schema(
       required: true,
     },
     ticketPrice: { type: String, required: true },
-
+    date: { type: String, required: true },
+    time: { type: String, required: true },
+    session: { type: String, required: true },
     status: {
       type: String,
       enum: ['pending', 'approved', 'cancelled'],
@@ -36,3 +38,5 @@ bookingSchema.pre(/^find/, function (next) {
 })
 
 export default mongoose.model('Booking', bookingSchema)
+
+// merge pe hours

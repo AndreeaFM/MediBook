@@ -5,13 +5,13 @@ import Stripe from 'stripe'
 
 export const getCheckoutSession = async (req, res) => {
   try {
-    //get currently booked doctor
+    // Get the currently booked doctor
     const doctor = await Doctor.findById(req.params.doctorId)
     const user = await User.findById(req.userId)
 
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
-    //create stripe checkout session
+    // Create Stripe checkout session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       mode: 'payment',
@@ -35,12 +35,15 @@ export const getCheckoutSession = async (req, res) => {
       ],
     })
 
-    // create new booking
+    // Create new booking
     const booking = new Booking({
       doctor: doctor._id,
       user: user._id,
       ticketPrice: doctor.ticketPrice,
       session: session.id,
+      date: req.body.date,
+      time: req.body.time,
+      status: 'pending',
     })
 
     await booking.save()
@@ -55,3 +58,5 @@ export const getCheckoutSession = async (req, res) => {
       .json({ success: false, message: 'Error creating checkout session' })
   }
 }
+
+// merge pe hours
