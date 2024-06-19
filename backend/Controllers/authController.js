@@ -74,6 +74,7 @@ export const login = async (req, res) => {
 
     const patient = await User.findOne({ email })
     const doctor = await Doctor.findOne({ email })
+    const admin = await User.findOne({ email, role: 'admin' })
 
     if (patient) {
       user = patient
@@ -81,8 +82,11 @@ export const login = async (req, res) => {
     if (doctor) {
       user = doctor
     }
+    if (admin) {
+      user = admin
+    }
 
-    // check if user exist or not
+    // check if user exists or not
     if (!user) {
       return res.status(404).json({ message: 'User not found' })
     }

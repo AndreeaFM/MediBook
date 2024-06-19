@@ -9,6 +9,7 @@ import doctorRoute from './Routes/doctor.js'
 import reviewRoute from './Routes/review.js'
 import bookingRoute from './Routes/booking.js' // Existing booking route
 import bookingRoutesWithCalendar from './Routes/bookingRoutes.js' // New booking route with date and time
+import adminRoutes from './Routes/adminRoutes.js' //new admin route
 
 dotenv.config()
 
@@ -48,6 +49,7 @@ app.use('/api/v1/doctors', doctorRoute)
 app.use('/api/v1/reviews', reviewRoute)
 app.use('/api/v1/bookings', bookingRoute) // Existing booking route
 app.use('/api/v1', bookingRoutesWithCalendar) // New booking route with date and time
+app.use('/api/v1/admin', adminRoutes) // new admin route
 
 app.listen(port, () => {
   connectDB()

@@ -46,7 +46,6 @@ const Profile = ({ user }) => {
     setFormData({ ...formData, photo: data.url })
 
     //console.log(data)
-    //i use cloudinary to upload images
 
     //console.log(file)
   }

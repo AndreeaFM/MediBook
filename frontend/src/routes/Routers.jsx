@@ -11,6 +11,7 @@ import CheckoutSuccess from '../pages/CheckoutSuccess.jsx'
 
 import { Routes, Route } from 'react-router-dom'
 import ProtectedRoute from './ProtectedRoute.jsx'
+import AdminDashboard from '../pages/adminDashboard.jsx' //import admin
 
 const Routers = () => {
   return (
@@ -24,6 +25,14 @@ const Routers = () => {
       <Route path="/contact" element={<Contact />} />
       <Route path="/services" element={<Services />} />
       <Route path="/checkout-success" element={<CheckoutSuccess />} />
+      <Route
+        path="/admin"
+        element={
+          <ProtectedRoute allowedRoles={['admin']}>
+            <AdminDashboard />
+          </ProtectedRoute>
+        }
+      />
       <Route
         path="/users/profile/me"
         element={
