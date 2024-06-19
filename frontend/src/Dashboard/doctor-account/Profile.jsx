@@ -112,7 +112,8 @@ const Profile = ({ doctorData }) => {
       startingDate: '',
       endingDate: '',
       degree: 'PHD',
-      university: 'Polytehnica Timisoara',
+      university:
+        'Universitatea de Medicină și Farmacie Victor Babeș Timisoara',
     })
   }
 
